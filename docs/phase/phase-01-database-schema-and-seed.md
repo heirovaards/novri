@@ -70,12 +70,12 @@ Login pages, session helpers, any action/query/screen, demo business data beyond
 - Seeds are idempotent (run twice, same row counts).
 
 ## Acceptance checklist
-- [ ] All 61 tables + Better Auth tables exist after `pnpm db:migrate`; names and columns match TRD §10.
-- [ ] Every enum in TRD §10.2 exists with the listed values.
-- [ ] Audit triggers exist on all business tables (query `pg_trigger` in a test).
-- [ ] `pnpm db:seed` creates 1 fakultas, 1 prodi, 18 academic years, all reference lists with the PRD §13.2 values, and the EWMP setting.
-- [ ] `pnpm db:reset` works locally and refuses when `NODE_ENV=production`.
-- [ ] `pnpm verify` passes (convention checks include all table files).
+- [x] All 61 tables + Better Auth tables exist after `pnpm db:migrate`; names and columns match TRD §10. Verified: 65 tables in `information_schema.tables`.
+- [x] Every enum in TRD §10.2 exists with the listed values. Verified by querying `pg_enum`/`pg_type` directly — all 16 enums match character-for-character.
+- [x] Audit triggers exist on all business tables (query `pg_trigger` in a test). `apply-audit-triggers.test.ts` asserts a count of 60 and asserts zero on each excluded table.
+- [x] `pnpm db:seed` creates 1 fakultas, 1 prodi, 18 academic years, all reference lists with the PRD §13.2 values, and the EWMP setting. Verified via direct query: 1/1/18/67/1.
+- [x] `pnpm db:reset` works locally and refuses when `NODE_ENV=production`. Verified both paths.
+- [x] `pnpm verify` passes (convention checks include all table files).
 
 ## Verify
 ```bash

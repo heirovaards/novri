@@ -3,7 +3,11 @@ import { basename, relative } from 'node:path';
 import ts from 'typescript';
 import { walkSourceFiles } from './lib/walk-source-files';
 
-const EXEMPT_PATTERNS = [/[\\/]frontend[\\/]shared[\\/]components[\\/]ui[\\/]/, /[\\/]backend[\\/]db[\\/]auth-schema\.ts$/];
+const EXEMPT_PATTERNS = [
+  /[\\/]frontend[\\/]shared[\\/]components[\\/]ui[\\/]/,
+  /[\\/]backend[\\/]db[\\/]auth-schema\.ts$/,
+  /[\\/]backend[\\/]db[\\/]client\.ts$/, // TRD §7.19 mandates the export name `db`, not `client`/`Client`
+];
 
 const SUFFIX_RULES: Record<string, (stem: string) => string> = {
   screen: (stem) => `${toPascalCase(stem)}Screen`,

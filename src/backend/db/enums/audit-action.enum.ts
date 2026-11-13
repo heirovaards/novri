@@ -1,0 +1,25 @@
+import { pgEnum } from 'drizzle-orm/pg-core';
+
+export const auditActionEnum = pgEnum('audit_action', [
+  'insert',
+  'update',
+  'delete',
+  'login',
+  'logout',
+  'login_failed',
+  'submit',
+  'verify',
+  'return',
+  'import',
+  'export',
+  'period_create',
+  'period_lock',
+  'period_reopen',
+  'nihil_set',
+  'nihil_clear',
+  'user_create',
+  'user_update',
+  'user_deactivate',
+  'user_activate',
+  'password_reset',
+]);
