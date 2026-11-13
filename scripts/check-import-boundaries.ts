@@ -89,10 +89,12 @@ function violationFor(fromFileName: string, from: { zone: Zone }, target: Target
 function collectSpecifiers(sourceFile: ts.SourceFile): string[] {
   const specifiers: string[] = [];
   for (const statement of sourceFile.statements) {
-    if (ts.isImportDeclaration(statement) && ts.isStringLiteral(statement.moduleSpecifier)) {
+    // `import type { X } from '...'` / `export type { X } from '...'` are erased at compile time
+    // and have no runtime boundary to enforce.
+    if (ts.isImportDeclaration(statement) && !statement.importClause?.isTypeOnly && ts.isStringLiteral(statement.moduleSpecifier)) {
       specifiers.push(statement.moduleSpecifier.text);
     }
-    if (ts.isExportDeclaration(statement) && statement.moduleSpecifier && ts.isStringLiteral(statement.moduleSpecifier)) {
+    if (ts.isExportDeclaration(statement) && !statement.isTypeOnly && statement.moduleSpecifier && ts.isStringLiteral(statement.moduleSpecifier)) {
       specifiers.push(statement.moduleSpecifier.text);
     }
   }

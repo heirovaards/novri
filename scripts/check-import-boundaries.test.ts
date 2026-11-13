@@ -31,4 +31,15 @@ describe('checkImportBoundaries', () => {
     expect(violations).toHaveLength(1);
     expect(violations[0]).toContain('@backend/db/client');
   });
+
+  it('ignores a type-only import of a query file from a non-screen frontend component', () => {
+    root = mkdtempSync(join(tmpdir(), 'lkps-boundaries-type-only-'));
+    mkdirSync(join(root, 'src', 'frontend', 'features', 'foo', 'components'), { recursive: true });
+    writeFileSync(
+      join(root, 'src', 'frontend', 'features', 'foo', 'components', 'foo-table.component.tsx'),
+      "import type { FooRow } from '@backend/features/foo/queries/list-foo.query';\nexport function FooTable(props: { rows: FooRow[] }) { return null; }\n",
+    );
+
+    expect(checkImportBoundaries(root)).toEqual([]);
+  });
 });

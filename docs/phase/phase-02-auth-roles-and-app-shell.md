@@ -63,13 +63,13 @@ Periods, master data, any LKPS table. The period chip in the top bar shows "Belu
 - E2E (`tests/e2e/auth.spec.ts`): wrong password message; Admin Sistem logs in and creates an Admin Prodi; that user logs in, is forced to change password, lands on the dashboard placeholder; opening `/admin/pengguna` as Admin Prodi shows the 403 page.
 
 ## Acceptance checklist
-- [ ] FR-01 AC1–AC10 pass (AC3 lockout verified with a test that makes 6 attempts; the Dosen-link part of AC4 is completed in Phase 04).
-- [ ] FR-02 AC1–AC3 pass for the pages that exist.
-- [ ] Session idle timeout follows `SESSION_IDLE_MINUTES` (test with a short value).
-- [ ] The shell matches DESIGN §5 (sidebar colours, active state, top bar contents, footer).
-- [ ] All shared components listed above exist and are used by the Pengguna screen.
-- [ ] Login, change-password, 403 and Pengguna screens are keyboard-operable with visible focus.
-- [ ] `pnpm verify` and the E2E spec pass.
+- [x] FR-01 AC1–AC10 pass (AC3 lockout verified with a test that makes 6 attempts; the Dosen-link part of AC4 is completed in Phase 04).
+- [x] FR-02 AC1–AC3 pass for the pages that exist.
+- [ ] Session idle timeout follows `SESSION_IDLE_MINUTES` (test with a short value). Code-reviewed correct (`authInstance`'s `session.expiresIn` reads the env var) but not exercised with an actual short value and a real wait — see phase log.
+- [x] The shell matches DESIGN §5 (sidebar colours, active state, top bar contents, footer).
+- [x] All shared components listed above exist and are used by the Pengguna screen.
+- [x] Login, change-password, 403 and Pengguna screens are keyboard-operable with visible focus.
+- [x] `pnpm verify` and the E2E spec pass.
 
 ## Verify
 ```bash

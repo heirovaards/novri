@@ -1,0 +1,25 @@
+import type { Capability, Role } from './capability.type';
+
+export const permissionMatrix: Record<Capability, Role[]> = {
+  'users.manage': ['admin_sistem'],
+  'period.reopen': ['admin_sistem'],
+  'refs.manage': ['admin_sistem', 'kaprodi'],
+  'audit.view': ['admin_sistem', 'kaprodi'],
+  'period.create': ['kaprodi'],
+  'period.submit': ['kaprodi'],
+  'settings.validation': ['kaprodi'],
+  'entries.verify': ['kaprodi'],
+  'period.view': ['admin_sistem', 'kaprodi', 'admin_prodi'],
+  'master.manage': ['kaprodi', 'admin_prodi'],
+  'import.run': ['kaprodi', 'admin_prodi'],
+  'entries.manage_all': ['kaprodi', 'admin_prodi'],
+  'table.nihil': ['kaprodi', 'admin_prodi'],
+  'preview.view': ['kaprodi', 'admin_prodi'],
+  'export.run': ['kaprodi', 'admin_prodi'],
+  'dashboard.full': ['kaprodi', 'admin_prodi'],
+  'evidence.view_all': ['kaprodi', 'admin_prodi'],
+  'entries.manage_own': ['kaprodi', 'admin_prodi', 'dtpr'],
+  'evidence.view_own': ['kaprodi', 'admin_prodi', 'dtpr', 'dosen'],
+  'dashboard.my_tasks': ['kaprodi', 'admin_prodi', 'dtpr', 'dosen'],
+  'curriculum.edit_own': ['kaprodi', 'admin_prodi', 'dosen'],
+};
