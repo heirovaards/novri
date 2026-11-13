@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:17
+    environment: { POSTGRES_USER: lkps, POSTGRES_PASSWORD: lkps, POSTGRES_DB: lkps, TZ: Asia/Jakarta }
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    ports: ["5432:5432"]
+  app:
+    build: { context: ., dockerfile: docker/Dockerfile }
+    env_file: .env
+    environment: { DATABASE_URL: "postgres://lkps:lkps@db:5432/lkps", STORAGE_LOCAL_PATH: /data/uploads }
+    depends_on: [db]
+    ports: ["3000:3000"]
+    volumes: ["uploads:/data/uploads"]
+    profiles: ["full"]
+  backup:
+    image: postgres:17
+    entrypoint: ["/bin/sh", "/backup.sh"]
+    environment: { PGPASSWORD: lkps, TZ: Asia/Jakarta }
+    volumes: ["./docker/backup.sh:/backup.sh:ro", "backups:/backups", "uploads:/data/uploads:ro"]
+    depends_on: [db]
+    profiles: ["full"]
+volumes: { pgdata: {}, uploads: {}, backups: {} }

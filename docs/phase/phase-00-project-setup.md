@@ -65,13 +65,13 @@ Database tables, authentication, any business feature, any real page beyond a pl
 - A fixtures-based test for each convention script: one passing and one failing sample.
 
 ## Acceptance checklist
-- [ ] `pnpm dev` serves the placeholder page with Source Sans 3 and the grey background `#F4F6F9`.
-- [ ] `pnpm verify` passes on a clean checkout.
-- [ ] Each convention script fails on its failing fixture and passes on the repository.
-- [ ] `docker compose up -d db` starts PostgreSQL 17; the app can connect using `DATABASE_URL`.
-- [ ] `.env.example` lists every key in TRD §21.1; `.env` is git-ignored.
-- [ ] Folder skeleton matches TRD §4.
-- [ ] Dependency versions are pinned and listed in the phase log.
+- [x] `pnpm dev` serves the placeholder page with Source Sans 3 and the grey background `#F4F6F9`. Verified by fetching the compiled CSS: `--background: #f4f6f9`, `--brand-500: #f07316`, `--primary: #b4500a`, and the Source Sans 3 font variable class applied to `<html>`.
+- [x] `pnpm verify` passes on a clean checkout.
+- [x] Each convention script fails on its failing fixture and passes on the repository.
+- [ ] `docker compose up -d db` starts PostgreSQL 17; the app can connect using `DATABASE_URL`. **Not verified** — Docker Desktop could not be made to work on the development machine (GlobalProtect VPN's network filter driver conflicts with Hyper-V/WSL2 virtual switch creation; confirmed root cause, workaround not found). `docker-compose.yml` is written to spec and untested. Verified instead against PostgreSQL 18 installed natively (see phase log).
+- [x] `.env.example` lists every key in TRD §21.1; `.env` is git-ignored.
+- [x] Folder skeleton matches TRD §4.
+- [x] Dependency versions are pinned and listed in the phase log.
 
 ## Verify
 ```bash
